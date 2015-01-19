@@ -1,21 +1,62 @@
-<script>
-  function Card(s, r) {
-    this.suit = s;
-    this.rank = r;
-  }
+<!doctype html>
+<html>
+  <head>
+    <title>
+      Deck of Cards
+    </title>
+    <style>
+      body {
+        font-family: arial;
+      }
+      ul#deck {
+        color: white;
+        padding: 1em;
+        width: 52em;
+        background-color: purple;
+      }
+      li.card {
+        display: inline-block;
+        width: 4em;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Deck of Cards</h1>
+    <ul id="deck" class="collection">
+    </ul>
+    <button id="shuffle">Shuffle now!</button>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+      function Deck() {
+        var theDeck = this,
+          $deck = $('#deck'),
+          card;
+        this.suits = ['H', 'C', 'D', 'S'];
+        this.ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
-  function Deck() {
-    this.cards = [];
-    this.build = function() {
-      for (var suit = 1; suit <= 4; suit++) {
-        for (var rank = 1; rank <= 13; rank++) {
-          this.cards.push(new Card(suit, rank));
+        $.each(this.suits, function(index, suit){
+          $.each(theDeck.ranks, function(index, rank){
+            card = new Card(suit, rank)
+            $deck.append(card.toHTML());
+          });
+        });
+      }
+
+      function Card(suit, rank) {
+        this.suit = suit;
+        this.rank = rank;
+
+        this.toHTML = function() {
+          return '<li class="card">' + this.suit + '-' + this.rank + '</li>';
         };
-      };
-    }
-  }
+      }
 
-  var deck = new Deck();
-  deck.build();
+      $('#shuffle').on('click', function() {
+        //
+      });
 
-</script>
+      var deck = new Deck();
+    </script>
+  </body>
+</html>
