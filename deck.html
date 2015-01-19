@@ -1,0 +1,21 @@
+<script>
+  function Card(s, r) {
+    this.suit = s;
+    this.rank = r;
+  }
+
+  function Deck() {
+    this.cards = [];
+    this.build = function() {
+      for (var suit = 1; suit <= 4; suit++) {
+        for (var rank = 1; rank <= 13; rank++) {
+          this.cards.push(new Card(suit, rank));
+        };
+      };
+    }
+  }
+
+  var deck = new Deck();
+  deck.build();
+
+</script>
