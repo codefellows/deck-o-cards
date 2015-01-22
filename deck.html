@@ -1,0 +1,57 @@
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+    ul#deck {
+      background-color: purple;
+      overflow: hidden;
+      width: 33em;
+    }
+
+    li.card {
+      float: left;
+      display: block;
+      color: white;
+      width: 2.5em;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <ul id="deck">
+    </ul>
+  </main>
+
+  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script type="text/javascript">
+    $(function() { 
+      function Card(r, s) {
+        this.rank = r;
+        this.suit = s;
+      }
+
+      Card.prototype.toHtml = function() {
+        return "<li class='card'>" + this.rank + "-" + this.suit + "</li>";
+      }
+
+      function Deck() {
+        thisDeck   = this;
+        this.ranks = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
+        this.suits = ["D", "C", "H", "S"];
+
+        $.each(thisDeck.suits, function() {
+          var suit = this;
+          $.each(thisDeck.ranks, function() {
+            var rank = this;
+            var card = new Card(rank, suit);
+            $("#deck").append(card.toHtml());
+          });
+        });
+      }
+
+      deck = new Deck();
+    });
+  </script>
+</body>
+</html>
