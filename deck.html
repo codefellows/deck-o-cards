@@ -21,6 +21,7 @@
   <main>
     <ul id="deck">
     </ul>
+    <button>Shuffle!</button>
   </main>
 
   <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -50,8 +51,34 @@
         });
       }
 
+      var shuffle = function(m) {
+        var $temp, rand;
+        // get a random card before current position
+        rand = Math.floor(Math.random() * m--);
+
+        // swap with current position
+        $temp = $(".card:eq(" + m + ")"); //Concatenate the m value into a selector
+        $rand = $(".card:eq(" + rand + ")");
+
+        $temp.before($rand);
+        $(".card:eq(" + rand + ")").before($temp);
+
+        if (m) {
+          setTimeout(shuffle, 1000, m);
+        }
+      };
+
       deck = new Deck();
+
+      $("button").on("click", function() { shuffle($("#deck .card").length) });
     });
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
